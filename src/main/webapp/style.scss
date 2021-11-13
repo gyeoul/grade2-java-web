@@ -1,0 +1,269 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #333333;
+  font-family: sans-serif;
+  nav {
+    width: 978px;
+    margin: auto;
+  }
+  section {
+    width: 100%;
+    background-color: white;
+  }
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  a {
+    text-decoration: none;
+  }
+  article {
+    padding: 25px;
+    margin: auto;
+    width: 978px;
+    hr {
+      background-color: #333;
+    }
+    figure {
+      display: inline-block;
+      margin: 0;
+      img {
+        width: 80%;
+      }
+    }
+    table {
+      text-align: center;
+      width: 100%;
+      border-collapse: collapse;
+      tr {
+        td {
+          padding: 0;
+        }
+      }
+    }
+  }
+}
+.highlight_lightgrey{
+  background-color: lightgray;
+}
+.bordering_lightgrey{
+  border-color: lightgray;
+}
+header{
+  width: 100%;
+  background-color: #333; //팀별 변경
+}
+nav {
+  height: 60px;
+  img {
+    display: block;
+    vertical-align: bottom;
+  }
+  ul {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    float: left;
+    li {
+      width: 100px;
+      display: inline-block;
+      text-align: center;
+      vertical-align: top;
+      line-height: 60px;
+      height: 60px;
+      img {
+        height: 30px;
+        margin: auto;
+        padding: 12.5px;
+      }
+      a {
+        display: block;
+        color: white; //팀별 변경?
+        text-decoration: none;
+      }
+      a:hover {
+        text-decoration: underline;
+        text-decoration-color: white; //팀별 변경?
+      }
+    }
+  }
+  #profile {
+    display: inline-block;
+    left: 10px;
+    float: right;
+    height: 60px;
+    img {
+      height: 30px;
+      padding: 15px;
+      margin: auto;
+    }
+    &:hover ul{
+      display: block;
+    }
+    ul {
+      text-align: left;
+      background-color: grey;
+      width: 150px;
+      font-size: 1.2em;
+      display: none;
+      float: right;
+      position: absolute;
+      li {
+        width: 150px;
+      }
+      a{
+        color: white;
+      }
+    }
+  }
+}
+footer {
+  width: 100%;
+  div {
+    width: 978px;
+    margin: auto;
+    padding: 20px;
+    color: white;
+  }
+  a{
+    color: white;
+  }
+}
+//공용
+
+//메인페이지
+.schedule_item {
+  text-align: center;
+  width: 160px;
+  padding: 0;
+  margin: 10px;
+  display: inline-block;
+  font-size: 0.8em;
+  background-color: #f7f7f7;
+  border: 1px solid #333;
+  .date {
+    background-color: #333333;
+    color: white;
+    padding: 15px;
+    font-size: 1.3em;
+  }
+  .weather {
+    margin-top: 20px;
+    table {
+      tr {
+        img {
+          width: 50%;
+        }
+        &>td{
+          padding: 0.25em 0;
+          font-size: 0.8em;
+        }
+        &:first-child>td {
+          padding: 0.5em;
+          font-size: 1em;
+        }
+      }
+    }
+  }
+}
+
+#rank {
+  #player_rank {
+    display: inline-block;
+    width: 480px;
+    table {
+    }
+    #rank_select {
+      border-collapse: separate;
+      font-size: 1.2em;
+      font-weight: bold;
+      border-bottom: 3px solid #333;
+      td {
+        width: 30%;
+        padding: 10px;
+        &:hover {
+          background-color: #333333;
+          color: white;
+        }
+      }
+    }
+    #rank_data {
+      #hitter_rank,#pitcher_rank,#week_rank{
+        display: none;
+      }
+    }
+    #rank_select:nth-child(1):hover #hitter_rank {
+      display: block;
+    }
+    #rank_select:nth-child(2):hover #pitcher_rank {
+      display: block;
+    }
+    #rank_select:nth-child(3):hover #week_rank {
+      display: block;
+    }
+  }
+  #team_rank {
+    display: inline-block;
+    width: 480px;
+    h2 {
+      display: inline-block;
+    }
+    p {
+      display: inline-block;
+      float: right;
+    }
+    table {
+      tr {
+        td {
+          width: auto;
+          padding: 5px;
+          &:first-child {
+            font-weight: bold;
+          }
+        }
+        &:first-child {
+          font-weight: bold;
+          td{
+            padding: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/*tbody>tr:first-child {
+        border-bottom: 3px solid #333;
+      }
+      tr:nth-child(1):hover .rank_data {
+        display: block;
+      }
+      &>tbody:first-child {
+        font-size: 1.5em;
+        padding: 10px;
+        &.current {
+          background-color: #333;
+          a {
+            color: white;
+          }
+        }
+      }
+      .rank_data {
+        tbody>tr:first-child {
+          border-bottom: none;
+        }
+        td {
+          width: 15%;
+          font-size: 0.8em;
+        }
+        table {
+          display: none;
+          tr {
+            &:first-child {
+              padding: 10px;
+            }
+          }
+        }
+      }*/
