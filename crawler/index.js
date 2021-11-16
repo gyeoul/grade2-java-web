@@ -1,12 +1,4 @@
 const puppeteer = require('puppeteer');
-const mysql = require('mysql');
-const dbconnect  = {
-    host: '211.193.44.86',
-    port: '31022',
-    user: 'dongyang',
-    password: 'web',
-    database: 'dongyang'
-}
 const teams = {
     'NC' : 'NC',
     'OB' : '두산',
@@ -19,8 +11,6 @@ const teams = {
     'SK' : 'SSG',
     'HH' : '한화',
 };
-const connection = mysql.createConnection();
-connection.connect();
 
 (async () => {
     const browser = await puppeteer.launch();
