@@ -16,7 +16,7 @@
 		String jdbcDriver = "jdbc:mysql://211.193.44.86:31022/jspdb?useUnicode=true&characterEncoding=utf-8";
 		String dbUser = "dongyang";
 		String dbPass = "web";
-		
+
 		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 		String sql = "select * from jspdb.member where member_id = ? and member_pw = ?";
 		pstmt = conn.prepareStatement(sql);
@@ -31,8 +31,7 @@
 			session.setAttribute("memid", id);
 			session.setAttribute("memlogin", "ok");
 			response.sendRedirect("index.jsp");
-		}
-		else {
+		} else {
 			%> 
 			<script type="text/javascript">
 			alert("아이디와 비밀번호를 다시 확인해주세요");

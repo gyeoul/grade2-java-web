@@ -1,7 +1,11 @@
 const puppeteer = require('puppeteer');
 const mysql = require('mysql');
 const dbconnect  = {
-    host: ''
+    host: '211.193.44.86',
+    port: '31022',
+    user: 'dongyang',
+    password: 'web',
+    database: 'dongyang'
 }
 const teams = {
     'NC' : 'NC',
