@@ -3,9 +3,9 @@
  <%
 	String memlogin = (String)session.getAttribute("memlogin");
  	String memid = (String)session.getAttribute("memid");
- 	String logpage = null;
- 	String logtxt = null;
- 	
+     String admin = (String)session.getAttribute("admin");
+
+
  %>
 <style>
 	header a, input[type="submit"]{
@@ -42,20 +42,28 @@
             </a>
             <ul>
                 <li><a class="menubnt" href="#">마이 페이지</a></li>
-                <li><a class="menubnt" href="#">관리자 페이지</a></li>
+                <li>
+                <%if (admin == null) { %>
+                	<a href="javascript:alert('열람권한이 없습니다');">관리자 페이지</a>
+                <% }
+                else {
+                	%> <form action="admin.jsp" method="post" >
+					<input type="submit" value="관리자 페이지">
+				</form>
+				<% } %>
+                </li>
                 <li> 
                 	<% if(memlogin==null){ %>
- 					<form action="loginform.jsp" >
+ 					<form action="loginform.jsp">
  						<input type="submit" value="로그인">
  					</form>
  					<%
- 					response.sendRedirect("loginform.jsp");
-                	} 
+                	}
                 	else {
  					%> <form action="logout.jsp" method="post" >
 						<input type="submit" value="로그아웃">
 					</form>
-					<%} %>
+					<% } %>
                 </li>
             </ul>
         </div>

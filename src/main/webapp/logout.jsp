@@ -3,6 +3,7 @@
 <%
 		session.removeAttribute("memid");
 		session.setAttribute("memlogin", null);
+		session.setAttribute("admin", null);
 		response.sendRedirect("index.jsp");
 %>
     

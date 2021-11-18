@@ -3,8 +3,8 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>회원가입</title>
 <link rel="stylesheet" href="./style.css">
 <style>
 
@@ -30,9 +30,20 @@
 		height : 35px;
 		font-size : 18px;
 		background-color : #333333;
-		color : #ffffff;	
+		color : #ffffff;
 	}
 </style>
+<script>
+	function noSpaceForm(obj) { // 공백사용못하게
+	    var str_space = /\s/;  // 공백체크
+	    if(str_space.exec(obj.value)) { //공백 체크
+	        obj.focus();
+	        obj.value = obj.value.replace(' ',''); // 공백제거
+	        return false;
+	    }
+
+	}
+</script>
 </head>
 <body>
 	<jsp:include page="./header.jsp" />
@@ -40,18 +51,18 @@
 	<article id="join">
 		<h2>회원가입</h2>
 		<hr>
-		<form action="join.jsp" method="post">	
-			<label id="ID">아이디</label>
-			<input id="ID" type="text" name="id" size="15" >
+		<form action="join.jsp" method="post">
+			<label >아이디</label>
+			<input type="text" name="id" size="15" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);" >
 			<br>
-			<label id="PW">비밀번호</label>
-			<input id="PW" type="password" name="pw" size="15">
+			<label >비밀번호</label>
+			<input  type="password" name="pw" size="15" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
 			<br>
-			<label id="PW">비밀번호 확인</label>
-			<input id="PW" type="password" name="pwcheck" size="15">
+			<label>비밀번호 확인</label>
+			<input type="password" name="pwcheck" size="15" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
 			<br>
-			<label id="MAIL">이메일</label>
-			<input id="MAIL" type="text" name="mail" size="25">
+			<label>이메일</label>
+			<input type="text" name="mail" size="25" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
 			<br>
 			<input id="ok" type="submit" value="회원가입">
 		</form>
