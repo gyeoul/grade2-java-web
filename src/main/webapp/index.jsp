@@ -24,9 +24,9 @@
                 <br>
                 <table>
                     <tr>
-                        <td><img src="./image/emblem_kia.png" alt="KIA"></td>
+                        <td><img src="./img/emblem_kia.png" alt="KIA"></td>
                         <td rowspan="2">vs</td>
-                        <td><img src="./image/emblem_doosan.png" alt="두산"></td>
+                        <td><img src="./img/emblem_doosan.png" alt="두산"></td>
                     </tr>
                     <tr>
                         <td>KIA</td>
@@ -41,13 +41,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="./image/weather/03_s.png" alt="">
+                            <img src="./img/weather/03_s.png" alt="">
                         </td>
                         <td>
                             <img src="./rain_s.png" alt="">
                         </td>
                         <td>
-                            <img src="./image/weather/01_xs.png" alt="">
+                            <img src="./img/weather/01_xs.png" alt="">
                         </td>
                     </tr>
                     <tr>
@@ -71,9 +71,9 @@
                 <br>
                 <table>
                     <tr>
-                        <td><img src="./image/emblem_ssg.png" alt="SSG"></td>
+                        <td><img src="./img/emblem_ssg.png" alt="SSG"></td>
                         <td rowspan="2">vs</td>
-                        <td><img src="./image/emblem_lotte.png" alt="롯데"></td>
+                        <td><img src="./img/emblem_lotte.png" alt="롯데"></td>
                     </tr>
                     <tr>
                         <td>SSG</td>
@@ -88,13 +88,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="./image/weather/03_s.png" alt="">
+                            <img src="./img/weather/03_s.png" alt="">
                         </td>
                         <td>
                             <img src="./rain_s.png" alt="">
                         </td>
                         <td>
-                            <img src="./image/weather/01_xs.png" alt="">
+                            <img src="./img/weather/01_xs.png" alt="">
                         </td>
                     </tr>
                     <tr>
@@ -118,9 +118,9 @@
                 <br>
                 <table>
                     <tr>
-                        <td><img src="./image/emblem_LG.png" alt="LG"></td>
+                        <td><img src="./img/emblem_LG.png" alt="LG"></td>
                         <td rowspan="2">vs</td>
-                        <td><img src="./image/emblem_NC.png" alt="NC"></td>
+                        <td><img src="./img/emblem_NC.png" alt="NC"></td>
                     </tr>
                     <tr>
                         <td>LG</td>
@@ -135,13 +135,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="./image/weather/03_s.png" alt="">
+                            <img src="./img/weather/03_s.png" alt="">
                         </td>
                         <td>
                             <img src="./rain_s.png" alt="">
                         </td>
                         <td>
-                            <img src="./image/weather/01_xs.png" alt="">
+                            <img src="./img/weather/01_xs.png" alt="">
                         </td>
                     </tr>
                     <tr>
@@ -165,9 +165,9 @@
                 <br>
                 <table>
                     <tr>
-                        <td><img src="./image/emblem_hanwha.png" alt="한화"></td>
+                        <td><img src="./img/emblem_hanwha.png" alt="한화"></td>
                         <td rowspan="2">vs</td>
-                        <td><img src="./image/emblem_KT.png" alt="KT"></td>
+                        <td><img src="./img/emblem_KT.png" alt="KT"></td>
                     </tr>
                     <tr>
                         <td>한화</td>
@@ -182,13 +182,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="./image/weather/03_s.png" alt="">
+                            <img src="./img/weather/03_s.png" alt="">
                         </td>
                         <td>
                             <img src="./rain_s.png" alt="">
                         </td>
                         <td>
-                            <img src="./image/weather/01_xs.png" alt="">
+                            <img src="./img/weather/01_xs.png" alt="">
                         </td>
                     </tr>
                     <tr>
@@ -212,9 +212,9 @@
                 <br>
                 <table>
                     <tr>
-                        <td><img src="./image/emblem_kiwoom.png" alt="키움"></td>
+                        <td><img src="./img/emblem_kiwoom.png" alt="키움"></td>
                         <td rowspan="2">vs</td>
-                        <td><img src="./image/emblem_samsung.png" alt="삼성"></td>
+                        <td><img src="./img/emblem_samsung.png" alt="삼성"></td>
                     </tr>
                     <tr>
                         <td>키움</td>
@@ -229,13 +229,13 @@
                     </tr>
                     <tr>
                         <td>
-                            <img src="./image/weather/03_s.png" alt="">
+                            <img src="./img/weather/03_s.png" alt="">
                         </td>
                         <td>
                             <img src="./rain_s.png" alt="">
                         </td>
                         <td>
-                            <img src="./image/weather/01_xs.png" alt="">
+                            <img src="./img/weather/01_xs.png" alt="">
                         </td>
                     </tr>
                     <tr>
@@ -272,11 +272,11 @@
                         </tr>
                         <tr>
                             <td>1위</td>
-                            <td><img src="./image/player/67341.png" alt=""> 이정후(키움)<br>0.362</td>
+                            <td><img src="./img/player/67341.png" alt=""> 이정후(키움)<br>0.362</td>
                             <td>1위</td>
-                            <td><img src="./image/player/62947.png" alt="">나성범(NC)<br>31</td>
+                            <td><img src="./img/player/62947.png" alt="">나성범(NC)<br>31</td>
                             <td>1위</td>
-                            <td><img src="./image/player/76232.png" alt="">양의지(NC)<br>102</td>
+                            <td><img src="./img/player/76232.png" alt="">양의지(NC)<br>102</td>
                         </tr>
                         <tr>
                             <td>2위</td>
