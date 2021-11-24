@@ -1,32 +1,32 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*" %>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
 
-<% request.setCharacterEncoding("utf-8"); %>
 <%
+	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 
-	Class.forName("com.mysql.cj.jdbc.Driver");
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	ResultSet rs = null;
 
 	try{
-		String jdbcDriver = "jdbc:mysql://211.193.44.86:31022/dongyang?useUnicode=true&characterEncoding=utf-8";
-		String dbUser = "dongyang";
-		String dbPass = "web";
+		Context initContext = new InitialContext();
+		Context envContext = (Context)initContext.lookup("java:/comp/env");
+		DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
+		conn = ds.getConnection();
 
-
-		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
 		String sql = "select * from dongyang.test_member where id = ? and pw = ?";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, pw);
+		pstmt.executeQuery();
 
 		rs = pstmt.executeQuery();
-
-
 		if(rs.next()){
 			do {
 				System.out.println(rs);
@@ -47,10 +47,13 @@
 		  </script>
 		<%
 		}
-		}
-		finally {
-			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
-			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
-		}
+	}
+	catch (Exception e) {
+		e.printStackTrace();
+	}
+	finally {
+		if (rs != null) try {rs.close();} catch (SQLException ex) {ex.printStackTrace();}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
+	}
 %>

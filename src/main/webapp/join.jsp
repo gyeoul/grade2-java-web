@@ -1,17 +1,17 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*" %>
-<!DOCTYPE html>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
 
-<% request.setCharacterEncoding("utf-8"); %>
 <%
+	request.setCharacterEncoding("utf-8");
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
 	String pwcheck = request.getParameter("pwcheck");
 	String mail = request.getParameter("mail");
-	
-	if(mail==""){mail=null;}
-	
+
 	Connection conn = null;
 	PreparedStatement pstmt = null;
 	PreparedStatement pstmt2 = null;
@@ -19,17 +19,15 @@
 	ResultSet rs = null;
 	ResultSet rs2 = null;
 
+	if(mail.equals(""))mail=null;
+
 	try{
-		Class.forName("com.mysql.cj.jdbc.Driver");
+		Context initContext = new InitialContext();
+		Context envContext = (Context)initContext.lookup("java:/comp/env");
+		DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
+		conn = ds.getConnection();
 		
-		String jdbcDriver = "jdbc:mysql://211.193.44.86:31022/dongyang?useUnicode=true&characterEncoding=utf-8";
-		String dbUser = "dongyang";
-		String dbPass = "web";
-		
-		
-		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-		
-		String sql = "insert into dongyang.test_member values(?,?,?,?)";	
+		String sql = "insert into dongyang.test_member values(?,?,?,?)";
 		pstmt = conn.prepareStatement(sql);
 		pstmt.setString(1, id);
 		pstmt.setString(2, pw);
@@ -47,7 +45,7 @@
 		rs2 = pstmt3.executeQuery();
 		
 
-		if( id == "" || id == null ) { 
+		if(id.equals("")) {
 			%> 
 			<script type="text/javascript">
 			alert("아이디를 입력하세요");
@@ -55,7 +53,7 @@
 			</script>
 			<% 
 			}
-		else if(pw == "" || pw == null){
+		else if(pw.equals("")){
 			%> 
 			<script type="text/javascript">
 			alert("비밀번호를 입력하세요");
@@ -76,7 +74,7 @@
 					}
 		else if(rs2.next()){
 			String memmail = rs2.getString("mail");
-			if( memmail!=null && mail.equals(memmail)){
+			if(mail.equals(memmail)){
 				%> 
 				<script type="text/javascript">
 				alert("중복된 이메일입니다.");
@@ -93,7 +91,7 @@
 					%> 
 					<script type="text/javascript">
 					alert("회원가입됐습니다.");
-					location.href='index.jsp';
+					location.href='loginform.jsp';
 					 </script>
 					<%
 				}
@@ -109,13 +107,15 @@
 			}
 		}			 
 
+	}catch (Exception e){
+		e.printStackTrace();
 	}finally {
-			if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-			if (rs2 != null) try { rs.close(); } catch(SQLException ex) {}
-			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
-			if (pstmt2 != null) try { pstmt2.close(); } catch(SQLException ex) {}
-			if (pstmt3 != null) try { pstmt2.close(); } catch(SQLException ex) {}
-			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
-		}
+		if (rs != null) try { rs.close(); } catch(SQLException ex) {ex.printStackTrace();}
+		if (rs2 != null) try { rs2.close(); } catch(SQLException ex) {ex.printStackTrace();}
+		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
+		if (pstmt2 != null) try { pstmt2.close(); } catch(SQLException ex) {ex.printStackTrace();}
+		if (pstmt3 != null) try { pstmt2.close(); } catch(SQLException ex) {ex.printStackTrace();}
+		if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
+	}
 			
 %>
