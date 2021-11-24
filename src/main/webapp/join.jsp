@@ -1,5 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import = "java.sql.*" %>
 <%@ page import="javax.naming.Context" %>
 <%@ page import="javax.naming.InitialContext" %>
@@ -43,7 +42,6 @@
 		pstmt3 = conn.prepareStatement(sql3);
 		pstmt3.setString(1, mail);
 		rs2 = pstmt3.executeQuery();
-		
 
 		if(id.equals("")) {
 			%> 
@@ -107,9 +105,9 @@
 			}
 		}			 
 
-	}catch (Exception e){
+	} catch (Exception e){
 		e.printStackTrace();
-	}finally {
+	} finally {
 		if (rs != null) try { rs.close(); } catch(SQLException ex) {ex.printStackTrace();}
 		if (rs2 != null) try { rs2.close(); } catch(SQLException ex) {ex.printStackTrace();}
 		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}

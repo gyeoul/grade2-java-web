@@ -1,7 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import = "java.sql.*" %>
-    <% request.setCharacterEncoding("utf-8"); %>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import = "java.sql.*" %>
+<%@ page import="javax.naming.Context" %>
+<%@ page import="javax.naming.InitialContext" %>
+<%@ page import="javax.sql.DataSource" %>
+<% request.setCharacterEncoding("utf-8"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,66 +44,67 @@
 		<h2>회원관리</h2>
 		<hr>
 		<% 
-		
-	Class.forName("com.mysql.cj.jdbc.Driver");
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-	PreparedStatement pstmt2 = null;
-	ResultSet rs = null;
-	ResultSet rs2 = null;
-	
-	try{
-		String jdbcDriver = "jdbc:mysql://211.193.44.86:31022/dongyang?useUnicode=true&characterEncoding=utf-8";
-		String dbUser = "dongyang";
-		String dbPass = "web";
-		
-		
-		conn = DriverManager.getConnection(jdbcDriver, dbUser, dbPass);
-		String sql = "select * from dongyang.test_member";
-		pstmt = conn.prepareStatement(sql);
 
-		rs = pstmt.executeQuery();
-		%>
-		
-		<table>
-			<thead>
-				<tr>
-					<td>id</td>
-					<td>pw</td>
-					<td>mail</td>
-					<td>admin</td>
-					<td>delete</td>
-				</tr>
-			</thead>
-			<tbody>			
-		 <% 
-				while(rs.next()){
-						String memid = rs.getString("id");
-					 	String mempw = rs.getString("pw");
-					 	String memmail = rs.getString("mail");
-					 	String memadmin = rs.getString("admin");
-					 	%>
-					 <tr>
-					 	<td><form method="post" action="deleteform.jsp?id=<%=memid%>">
-					 	<input type="text" name=memid value=<%=memid%> readonly></td>
-					 	<td><%=mempw %></td>
-					 	<td><%=memmail%></td>
-					 	<td><%=memadmin%></td>
-					 	<td><input type="submit" value="회원삭제"></form></td>
-					 </tr>
-					 
-					 <%
-					}
+			Connection conn = null;
+			PreparedStatement pstmt = null;
+			PreparedStatement pstmt2 = null;
+			ResultSet rs = null;
+			ResultSet rs2 = null;
+
+			try{
+				Context initContext = new InitialContext();
+				Context envContext = (Context)initContext.lookup("java:/comp/env");
+				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
+				conn = ds.getConnection();
+
+				String sql = "select * from dongyang.test_member";
+				pstmt = conn.prepareStatement(sql);
+
+				rs = pstmt.executeQuery();
+				System.out.println(rs);
 				%>
-			</tbody>
+
+				<table>
+					<thead>
+						<tr>
+							<td>id</td>
+							<td>pw</td>
+							<td>mail</td>
+							<td>admin</td>
+							<td>delete</td>
+						</tr>
+					</thead>
+					<tbody>
+						<%
+							while(rs.next()){
+								System.out.println(rs);
+								String memid = rs.getString("id");
+								String mempw = rs.getString("pw");
+								String memmail = rs.getString("mail");
+								String memadmin = rs.getString("admin");
+								%>
+								<tr>
+									<form method="post" action="deleteform.jsp?id=<%=memid%>">
+										<td><input type="text" name=memid value=<%=memid%> readonly></td>
+										<td><%=mempw %></td>
+										<td><%=memmail%></td>
+										<td><%=memadmin%></td>
+										<td><input type="submit" value="회원삭제"></td>
+									</form>
+								</tr>
+								<%
+							}
+						%>
+					</tbody>
 		</table>
 		
-		<% 	
-			}	
-			finally {
-				if (rs != null) try { rs.close(); } catch(SQLException ex) {}
-				if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {}
-			if (conn != null) try { conn.close(); } catch(SQLException ex) {}
+		<%
+			} catch (Exception e){
+				e.printStackTrace();
+			} finally {
+				if (rs != null) try { rs.close(); } catch(SQLException ex) {ex.printStackTrace();}
+				if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
+			if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
 			}
 %>
 		
