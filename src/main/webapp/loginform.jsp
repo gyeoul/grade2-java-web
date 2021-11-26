@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
+<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<jsp:setProperty name="memBean" property="*" />
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>로그인</title>
 <link rel="stylesheet" href="./style.css">
 <style>
 	section span {
@@ -31,9 +33,10 @@
 		margin-top : 10px;
 		margin-bottom : 10px;
 		height :28px;
+		text-align: center;
 	}
 	section #ok {
-		margin-top : 10px;
+		margin-top : 20px;
 		width : 100px;
 		height : 35px;
 		font-size : 18px;
@@ -46,11 +49,12 @@
 <jsp:include page="./header.jsp" />
 <section>
 	<article id="login">
+		<div style= "margin-top: 19.92px; margin-bottom: 19.92px;" >
 		<span>로그인</span>
 		<span>|</span>
-		<span>
-			<a href="joinform.jsp">회원가입</a>
-		</span>
+		<span><a href="joinform.jsp">회원가입</a></span>
+		</div>
+			
 		<hr>
 		<form action="login.jsp" method="post">	
 			<label id="ID">아이디</label>

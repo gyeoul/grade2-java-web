@@ -1,33 +1,32 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
-<%@ page import="javax.sql.DataSource" %>
-<%@ page import="javax.naming.Context" %>
-<%@ page import="javax.naming.InitialContext" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<jsp:useBean id="memMg" class="webproject.memberMg" />
+<jsp:useBean id="memBean" class="webproject.memberBean" />
+<jsp:setProperty name="memBean" property="*" />
 <% 
-	request.setCharacterEncoding("utf-8");
-	String memid = request.getParameter("memid");
-
-	Connection conn = null;
-	PreparedStatement pstmt = null;
-
-	try{
-		Context initContext = new InitialContext();
-		Context envContext = (Context)initContext.lookup("java:/comp/env");
-		DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
-		conn = ds.getConnection();
-
-
-
-		String sql_del = "DELETE FROM dongyang.test_member WHERE id = '"+ memid + "';";
-		pstmt = conn.prepareStatement(sql_del);
-		pstmt.executeUpdate();
-	} catch (Exception e) {
-		e.printStackTrace();
-	} finally {
-		if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
-		if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
-	}
-	response.sendRedirect("admin.jsp");
+	boolean flag = memMg.memberDelete(memBean); 
 %>
 
+<%	
+if(flag) {
 	
+		session.invalidate();
+		%>
+ 		<script>
+ 		alert("탈퇴완료");
+ 		location.href="index.jsp";
+ 		</script>
+
+ <%
+ 	}
+ else{
+ %>
+ 		<script>
+ 		alert("에러가 발생하였습니다.");
+ 		history.back();
+ 		</script>
+
+<%
+ 	  }
+		
+%>

@@ -4,6 +4,9 @@
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="javax.sql.DataSource" %>
 <% request.setCharacterEncoding("utf-8"); %>
+<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<jsp:setProperty name="memBean" property="*" />
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +92,11 @@
 										<td><%=mempw %></td>
 										<td><%=memmail%></td>
 										<td><%=memadmin%></td>
-										<td><input type="submit" value="회원삭제"></td>
+										<td>
+											<form method="post" action="admin_deleteform.jsp?id=<%=memid%>">
+												<input type="submit" value="회원삭제"></form>
+											</form>
+										</td>
 									</form>
 								</tr>
 								<%

@@ -1,16 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import = "java.sql.*" %>
-<% 
-		request.setCharacterEncoding("utf-8");
-		String memid = request.getParameter("memid");
-%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean id="memBean" class="webproject.memberBean" />
+<jsp:setProperty name="memBean" property="*" />
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
+<title>회원탈퇴</title>
 <link rel="stylesheet" href="./style.css">
-<title>회원 삭제</title>
 <style >
 	#dele{
 		margin-top : 20px;
@@ -29,7 +25,7 @@
 		  font-size: 17px;
 		  text-align : center;
 		  padding: 7px 12px;
-		  margin-top: 25px;
+		  margin-top: 40px;
 		  margin-right: 12px;
 		  display: inline-block;
 		  width: 120px;
@@ -45,10 +41,10 @@
 	<jsp:include page="./header.jsp" />
 	<section>
 		<article>
-			<h2> 회원삭제</h2>
+			<h2> 회원탈퇴</h2>
 			<hr>
 			<form id="dele" action="delete.jsp" >
-			<input type="text" name=memid value=<%=memid%> readonly>님을 삭제하시겠습니까?
+			<input type="text" name=id value=<%=memBean.getId()%> readonly>님 탈퇴하시겠습니까?
 			<br>
 			<input type="submit" value="확인">
 		</form>  
@@ -57,4 +53,3 @@
 	<jsp:include page="./footer.jsp" />
 </body>
 </html>
-	

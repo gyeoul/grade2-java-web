@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<jsp:setProperty name="memBean" property="*" />
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,9 +26,10 @@
 		margin-top : 10px;
 		margin-bottom : 10px;
 		height :28px;
+		text-align: center;
 	}
 	section #ok {
-		margin-top : 10px;
+		margin-top : 30px;
 		width : 100px;
 		height : 35px;
 		font-size : 18px;
@@ -62,7 +66,7 @@
 			<input type="password" name="pwcheck" size="15" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
 			<br>
 			<label>이메일</label>
-			<input type="text" name="mail" size="25" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
+			<input type="text" name="email" size="25" onkeyup="noSpaceForm(this);" onchange="noSpaceForm(this);">
 			<br>
 			<input id="ok" type="submit" value="회원가입">
 		</form>

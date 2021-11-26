@@ -41,7 +41,14 @@
                 <img src="./outline_account_circle_white_24dp.png" alt="account">
             </a>
             <ul>
-                <li><a class="menubnt" href="#">마이 페이지</a></li>
+                <li> <%if (memlogin == null) { %>
+                	<a href="javascript:alert('로그인하세요');">마이페이지</a>
+                <% }
+                else {
+                	%> <form action="mypage.jsp?id=<%=memid%>" method="post" >
+					<input type="submit" value="마이페이지">
+				</form>
+				<% } %></li>
                 <li>
                 <%if (admin == null) { %>
                 	<a href="javascript:alert('열람권한이 없습니다');">관리자 페이지</a>
