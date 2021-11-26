@@ -1,4 +1,8 @@
+<%@ page import="java.sql.*" %>
+<%@ page import="javax.naming.*" %>
+<%@ page import="javax.sql.DataSource" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean class="webproject.teamrankBean" id="teamrankBean"/>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -365,6 +369,23 @@
                 <h2>팀 랭킹</h2>
                 <p>10월 16일 기준</p>
                 <hr>
+                <%
+                    Connection conn = null;
+                    PreparedStatement pstmt = null;
+                    ResultSet rs = null;
+
+                    try{
+                        Context initContext = new InitialContext();
+                        Context envContext = (Context)initContext.lookup("java:/comp/env");
+                        DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
+                        conn = ds.getConnection();
+
+                        String sql = "select * from dongyang.TeamRank where YEAR=2021 order by `RANK`";
+                        pstmt = conn.prepareStatement(sql);
+
+                        rs = pstmt.executeQuery();
+                        System.out.println(rs);
+                %>
                 <table>
                     <tr class="highlight_lightgrey bordering_lightgrey">
                         <td class="bordering_lightgrey">순위</td>
@@ -377,117 +398,40 @@
                         <td>게임차</td>
                         <td>연속</td>
                     </tr>
+                    <% while (rs.next()){
+                        System.out.println(rs.getObject(1));
+                        String rank = rs.getString("RANK");
+                        String team = rs.getString("TEAM");
+                        String games = rs.getString("GAMES");
+                        String win = rs.getString("WIN");
+                        String lose = rs.getString("LOSE");
+                        String draw = rs.getString("DRAW");
+                        String rate = rs.getString("RATE");
+                        String gap = rs.getString("GAP");
+                        String straight = rs.getString("STRAIGHT");
+                    %>
                     <tr>
-                        <td>1</td>
-                        <td>KT</td>
-                        <td>132</td>
-                        <td>72</td>
-                        <td>52</td>
-                        <td>8</td>
-                        <td>0.581</td>
-                        <td>-</td>
-                        <td>1승</td>
+                        <td><%= rank %></td>
+                        <td><%= team %></td>
+                        <td><%= games %></td>
+                        <td><%= win %></td>
+                        <td><%= lose %></td>
+                        <td><%= draw %></td>
+                        <td><%= rate %></td>
+                        <td><%= gap %></td>
+                        <td><%= straight %></td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>LG</td>
-                        <td>129</td>
-                        <td>67</td>
-                        <td>53</td>
-                        <td>9</td>
-                        <td>0.558</td>
-                        <td>3</td>
-                        <td>1패</td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td>삼성</td>
-                        <td>134</td>
-                        <td>70</td>
-                        <td>56</td>
-                        <td>8</td>
-                        <td>0.556</td>
-                        <td>3</td>
-                        <td>2패</td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td>두산</td>
-                        <td>130</td>
-                        <td>64</td>
-                        <td>61</td>
-                        <td>5</td>
-                        <td>0.512</td>
-                        <td>8.5</td>
-                        <td>2패</td>
-                    </tr>
-                    <tr>
-                        <td>5</td>
-                        <td>키움</td>
-                        <td>132</td>
-                        <td>64</td>
-                        <td>62</td>
-                        <td>6</td>
-                        <td>0.508</td>
-                        <td>9</td>
-                        <td>1승</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>NC</td>
-                        <td>129</td>
-                        <td>61</td>
-                        <td>61</td>
-                        <td>7</td>
-                        <td>0.500</td>
-                        <td>10</td>
-                        <td>2승</td>
-                    </tr>
-                    <tr>
-                        <td>6</td>
-                        <td>SSG</td>
-                        <td>132</td>
-                        <td>60</td>
-                        <td>60</td>
-                        <td>12</td>
-                        <td>0.500</td>
-                        <td>10</td>
-                        <td>2승</td>
-                    </tr>
-                    <tr>
-                        <td>8</td>
-                        <td>롯데</td>
-                        <td>133</td>
-                        <td>61</td>
-                        <td>66</td>
-                        <td>6</td>
-                        <td>0.480</td>
-                        <td>12.5</td>
-                        <td>1승</td>
-                    </tr>
-                    <tr>
-                        <td>9</td>
-                        <td>KIA</td>
-                        <td>130</td>
-                        <td>51</td>
-                        <td>70</td>
-                        <td>9</td>
-                        <td>0.421</td>
-                        <td>19.5</td>
-                        <td>1승</td>
-                    </tr>
-                    <tr>
-                        <td>10</td>
-                        <td>한화</td>
-                        <td>133</td>
-                        <td>47</td>
-                        <td>76</td>
-                        <td>10</td>
-                        <td>0.382</td>
-                        <td>24.5</td>
-                        <td>4패</td>
-                    </tr>
+                    <% } %>
                 </table>
+                <%
+                    } catch (Exception e){
+                        e.printStackTrace();
+                    } finally {
+                        if (rs != null) try { rs.close(); } catch(SQLException ex) {ex.printStackTrace();}
+                        if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
+                        if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
+                    }
+                %>
             </div>
         </article>
     </section>

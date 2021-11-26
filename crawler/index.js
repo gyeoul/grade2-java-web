@@ -7,20 +7,9 @@ const dbconnect  = {
     password: 'web',
     database: 'dongyang'
 }
+const conn = mysql.createConnection(dbconnect)
 const KBLFY = 1982;//한국 야구 리그 원년
 const year_now = new Date().getFullYear();
-const teams = {
-    'NC' : 'NC',
-    'OB' : '두산',
-    'KT' : 'KT',
-    'LG' : 'LG',
-    'WO' : '키움',
-    'HT' : 'KIA',
-    'LT' : '롯데',
-    'SS' : '삼성',
-    'SK' : 'SSG',
-    'HH' : '한화',
-};
 function tagname(name) {
     let val = name;
     switch (name){
@@ -65,13 +54,26 @@ function tagname(name) {
         case 'SSG':
             val = 'SK';
             break;
+        case 'NC':
+            break;
+        case 'KT':
+            break;
 
     }
     return val;
 
 }
+let querysql = 'INSERT INTO TeamRank (ID,YEAR,`RANK`,TEAM,GAMES,WIN,LOSE,DRAW,RATE,GAP,LAST,STRAIGHT,HOME,AWAY) VALUES(?,?)';
 
 (async () => {
+    conn.connect();
+    conn.query('SELECT * FROM TeamRank', function(err, results) {
+        if (err) {
+            console.log(err);
+        }
+        console.log(results);
+    });
+
     const browser = await puppeteer.launch();
     const page = await browser.newPage();
     await page.setViewport({
@@ -82,13 +84,12 @@ function tagname(name) {
     await page.goto('https://www.koreabaseball.com/TeamRank/TeamRank.aspx');
     await page.waitForSelector('#contents');
     let data = await page.$$('#cphContents_cphContents_cphContents_udpRecord>.tData>tbody>tr');
-    console.log("ID\tYear\tRank\tTeam\t경기\tW\tL\tD\t승률\t게임차\t최근10경기\t연속\t홈\t방문");
+    console.log("ID\tYear\tRank\tTeam\tGames\tW\tL\tD\tRate\tGap\tLast10\tStraight\tHome\tAway");
     await page.select('#cphContents_cphContents_cphContents_ddlYear', );
 
-    for (let c_year = year_now-1; c_year >= KBLFY; c_year--) {
-        //await page.select('#cphContents_cphContents_cphContents_ddlYear', toString(c_year));
-        //await page.select('#cphContents_cphContents_cphContents_ddlSeries', '정규시즌');
+    for (let c_year = year_now; c_year > KBLFY; c_year--) {
         await page.select('#cphContents_cphContents_cphContents_ddlYear', `${c_year}`);
+        await page.waitForTimeout(1000);
         await page.click('.select01');
         await page.waitForTimeout(1000);
         await page.keyboard.press('Enter');
@@ -96,12 +97,28 @@ function tagname(name) {
         await page.waitForSelector('#cphContents_cphContents_cphContents_udpRecord>.tData>tbody>tr');
         data = await page.$$('#cphContents_cphContents_cphContents_udpRecord>.tData>tbody>tr');
         for (let item of data) {
+            let id = c_year + tagname(await item.$eval('*:nth-child(2)',n => n.innerText));
             let text = "";
-            text += c_year + tagname(await item.$eval('*:nth-child(2)',n => n.innerText)) + '\t' + c_year + '\t';
+            text += c_year + '\t';
             for (let i=1;i<=12;i++){
                 text += await item.$eval('*:nth-child('+i+')',node => node.innerText) + '\t';
             }
             console.log(text);
+            conn.query(querysql, [id,text.split('\t',13)], function(err, results) {
+                if (err) {
+                    console.log(err);
+                    if (c_year === year_now) {
+                        const updatequery = 'UPDATE TeamRank Set YEAR=?, `RANK`=?, TEAM=?, GAMES=?, WIN=?, LOSE=?, DRAW=?, RATE=?, GAP=?, LAST=?, STRAIGHT=?, HOME=?, AWAY=? WHERE ID=?'
+                        conn.query(updatequery, [text.split('\t',text.length-1),id], function (err, results) {
+                            if (err) {
+                                console.log(err);
+                            }
+                            console.log(results);
+                        });
+                    }
+                }
+                console.log(results);
+            });
         }
     }
     await browser.close();
