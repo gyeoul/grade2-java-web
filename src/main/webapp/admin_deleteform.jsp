@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ page import = "java.sql.*" %>
-<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<%@ page contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
+<jsp:useBean class="webproject.memberBean" id="memBean"/>
 <jsp:setProperty name="memBean" property="*" />
 <!DOCTYPE html>
 <html>
@@ -46,10 +45,10 @@
 			<h2> 회원삭제</h2>
 			<hr>
 			<form id="dele" action="admin_delete.jsp" >
-			<input type="text" name=id value=<%=memBean.getId()%> readonly>님을 삭제하시겠습니까?
-			<br>
-			<input type="submit" value="확인">
-		</form>  
+				<input type="text" name=id value=<%=memBean.getId()%> readonly>님을 삭제하시겠습니까?
+				<br>
+				<input type="submit" value="확인">
+			</form>
 		</article>
 	</section>
 	<jsp:include page="./footer.jsp" />

@@ -1,7 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
-<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<jsp:useBean class="webproject.memberBean" id="memBean"/>
 <jsp:setProperty name="memBean" property="*" />
 <html>
 <head>
@@ -49,7 +48,7 @@
 <jsp:include page="./header.jsp" />
 <section>
 	<article id="login">
-		<div style= "margin-top: 19.92px; margin-bottom: 19.92px;" >
+		<div style= "margin-top: 20px; margin-bottom: 20px;" >
 		<span>로그인</span>
 		<span>|</span>
 		<span><a href="joinform.jsp">회원가입</a></span>

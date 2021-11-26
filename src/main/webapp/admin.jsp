@@ -4,7 +4,7 @@
 <%@ page import="javax.naming.InitialContext" %>
 <%@ page import="javax.sql.DataSource" %>
 <% request.setCharacterEncoding("utf-8"); %>
-<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<jsp:useBean class="webproject.memberBean" id="memBean"/>
 <jsp:setProperty name="memBean" property="*" />
 
 <!DOCTYPE html>
@@ -50,9 +50,7 @@
 
 			Connection conn = null;
 			PreparedStatement pstmt = null;
-			PreparedStatement pstmt2 = null;
 			ResultSet rs = null;
-			ResultSet rs2 = null;
 
 			try{
 				Context initContext = new InitialContext();

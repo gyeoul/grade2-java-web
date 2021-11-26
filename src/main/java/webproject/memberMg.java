@@ -1,13 +1,12 @@
 package webproject;
 
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.sql.DataSource;
 
 
 public class memberMg {
@@ -139,7 +138,7 @@ public class memberMg {
 	        	Context initContext = new InitialContext();
 				Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
-				conn = ds.getConnection();;
+				conn = ds.getConnection();
 	            String sql = "select id from dongyang.test_member where id = ?";
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, id);

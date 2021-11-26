@@ -1,8 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<%@ page contentType="text/html; charset=UTF-8"
+		 pageEncoding="UTF-8"%>
+<jsp:useBean class="webproject.memberBean" id="memBean"/>
 <jsp:setProperty name="memBean" property="*" />
-<jsp:useBean class="webproject.memberMg" id="memMg" scope="page" />
+<jsp:useBean class="webproject.memberMg" id="memMg"/>
 <%
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
+<jsp:useBean class="webproject.memberBean" id="memBean"/>
 <jsp:setProperty name="memBean" property="*" />
-<jsp:useBean class="webproject.memberMg" id="memMg" scope="page" />
+<jsp:useBean class="webproject.memberMg" id="memMg"/>
 <%
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
@@ -10,12 +10,12 @@
 	String loginCheck = memMg.memberLogin(id, pw, adminCheck); 
 %>
 <%
-	if(loginCheck=="member"){
+	if(loginCheck.equals("member")){
 		session.setAttribute("memid",id);
 		session.setAttribute("memlogin","ok");
 		response.sendRedirect("index.jsp");
 	}
-	else if(loginCheck=="admin"){
+	else if(loginCheck.equals("admin")){
 		session.setAttribute("memid",id);
 		session.setAttribute("admin", "admin");
 		session.setAttribute("memlogin","ok");
