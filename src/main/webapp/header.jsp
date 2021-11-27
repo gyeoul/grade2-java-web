@@ -4,8 +4,6 @@
 	String memlogin = (String)session.getAttribute("memlogin");
  	String memid = (String)session.getAttribute("memid");
      String admin = (String)session.getAttribute("admin");
-
-
  %>
 <style>
 	header a, input[type="submit"]{

@@ -1,11 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import = "java.sql.*" %>
-<%@ page import="javax.naming.Context" %>
-<%@ page import="javax.naming.InitialContext" %>
-<%@ page import="javax.sql.DataSource" %>
+<%@page import="java.util.*, webproject.*"%>
 <% request.setCharacterEncoding("utf-8"); %>
-<jsp:useBean class="webproject.memberBean" id="memBean"/>
+<jsp:useBean  id="memberBean" class="webproject.memberBean"/>
 <jsp:setProperty name="memBean" property="*" />
+<jsp:useBean id="memberMg" class="webproject.memberMg" />
 
 <!DOCTYPE html>
 <html>
@@ -14,9 +12,7 @@
 <title>관리 페이지</title>
     <link rel="stylesheet" href="./style.css">
 <style>
-	input[type="text"]{
-      	    all: unset;
-      }
+
       table, th, td {
 		  border: 1px solid black;
 		  border-collapse: collapse;
@@ -32,10 +28,14 @@
     	font-size : 20px;
     	height : 30px;
     }
-    input[type="submit"]:hover{
+    a {
+      	    all: unset;
+      }
+    a:hover {
     	color : #ff0000;
     	text-decoration: underline; 
     	text-underline-position:under;
+    	cursor:pointer;
     }
 
 </style>
@@ -46,74 +46,36 @@
 	<article>
 		<h2>회원관리</h2>
 		<hr>
-		<% 
-
-			Connection conn = null;
-			PreparedStatement pstmt = null;
-			ResultSet rs = null;
-
-			try{
-				Context initContext = new InitialContext();
-				Context envContext = (Context)initContext.lookup("java:/comp/env");
-				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
-				conn = ds.getConnection();
-
-				String sql = "select * from dongyang.test_member";
-				pstmt = conn.prepareStatement(sql);
-
-				rs = pstmt.executeQuery();
-				System.out.println(rs);
-				%>
-
-				<table>
-					<thead>
-						<tr>
-							<td>id</td>
-							<td>pw</td>
-							<td>mail</td>
-							<td>admin</td>
-							<td>delete</td>
-						</tr>
-					</thead>
-					<tbody>
-						<%
-							while(rs.next()){
-								System.out.println(rs);
-								String memid = rs.getString("id");
-								String mempw = rs.getString("pw");
-								String memmail = rs.getString("mail");
-								String memadmin = rs.getString("admin");
-								%>
-								<tr>
-									<form method="post" action="deleteform.jsp?id=<%=memid%>">
-										<td><input type="text" name=memid value=<%=memid%> readonly></td>
-										<td><%=mempw %></td>
-										<td><%=memmail%></td>
-										<td><%=memadmin%></td>
-										<td>
-											<form method="post" action="admin_deleteform.jsp?id=<%=memid%>">
-												<input type="submit" value="회원삭제"></form>
-											</form>
-										</td>
-									</form>
-								</tr>
-								<%
-							}
-						%>
-					</tbody>
+		<table>
+			<thead>
+				<tr>
+				<td> 회원 ID </td>
+				<td> 회원 PW </td>
+				<td> 회원 Email </td>
+				<td> admin </td>
+				<td> 회원삭제 </td>
+				</tr>
+			</thead>
+			<%
+				Vector<memberBean> mResult = memberMg.getMemberList();
+				for (webproject.memberBean bean : mResult) {
+					memberBean = bean;
+			%>
+			<tr>
+				<td align="center"><%=memberBean.getId()%>
+				</td>
+				<td align="center"><%=memberBean.getPw()%>
+				</td>
+				<td align="center"><%=memberBean.getEmail()%>
+				</td>
+				<td align="center"><%=memberBean.getAdmin()%>
+				</td>
+				<td align="center"><a href="admin_deleteform.jsp?id=<%=memberBean.getId()%>">회원삭제</a></td>
+			</tr>
+			<%
+				}
+			%>
 		</table>
-		
-		<%
-			} catch (Exception e){
-				e.printStackTrace();
-			} finally {
-				if (rs != null) try { rs.close(); } catch(SQLException ex) {ex.printStackTrace();}
-				if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
-			if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
-			}
-%>
-		
-		
 		
 	</article>
 </section>

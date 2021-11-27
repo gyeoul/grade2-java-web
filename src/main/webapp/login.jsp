@@ -6,27 +6,29 @@
 	request.setCharacterEncoding("UTF-8");
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
-	String adminCheck = null;
-	String loginCheck = memMg.memberLogin(id, pw, adminCheck); 
+	memBean = memMg.getLogin(id, pw);
+
 %>
 <%
-	if(loginCheck.equals("member")){
-		session.setAttribute("memid",id);
-		session.setAttribute("memlogin","ok");
-		response.sendRedirect("index.jsp");
-	}
-	else if(loginCheck.equals("admin")){
-		session.setAttribute("memid",id);
-		session.setAttribute("admin", "admin");
-		session.setAttribute("memlogin","ok");
-		response.sendRedirect("index.jsp");
-	}
-	else {
+	if(memBean==null){
 		%>
 		<script>
  		alert("아이디와 비밀번호 다시 입럭해주세요");
  		history.back();
  		</script>
 		<%
+	}
+	else {
+		if(	memBean.getAdmin()==null) {
+			session.setAttribute("memid",id);
+			session.setAttribute("memlogin","ok");
+			response.sendRedirect("index.jsp");
+		}
+		else {
+			session.setAttribute("memid",id);
+			session.setAttribute("admin","admin");
+			session.setAttribute("memlogin","ok");
+			response.sendRedirect("index.jsp");
+		}
 	}
 %>

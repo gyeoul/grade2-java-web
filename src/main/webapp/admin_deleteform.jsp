@@ -1,7 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8"
-		 pageEncoding="UTF-8"%>
-<jsp:useBean class="webproject.memberBean" id="memBean"/>
-<jsp:setProperty name="memBean" property="*" />
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,6 +34,7 @@
       	background: #333333;
       }
 </style>
+<% String id = request.getParameter("id"); %>
 </head>
 <body>
 	<jsp:include page="./header.jsp" />
@@ -45,10 +43,10 @@
 			<h2> 회원삭제</h2>
 			<hr>
 			<form id="dele" action="admin_delete.jsp" >
-				<input type="text" name=id value=<%=memBean.getId()%> readonly>님을 삭제하시겠습니까?
-				<br>
-				<input type="submit" value="확인">
-			</form>
+			<input type="text" name=id value=<%=id%> readonly>님을 삭제하시겠습니까?
+			<br>
+			<input type="submit" value="확인">
+		</form>
 		</article>
 	</section>
 	<jsp:include page="./footer.jsp" />
