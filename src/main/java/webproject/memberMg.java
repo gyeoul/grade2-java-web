@@ -3,19 +3,18 @@ package webproject;
 import javax.naming.Context;
 import javax.naming.InitialContext;
 import javax.sql.DataSource;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Vector;
+
 
 
 public class memberMg {
 	//로그인
-	public String  memberLogin (String id, String pw, String adminCheck) {
+	public memberBean getLogin (String id, String pw) {
 		Connection conn = null;
         PreparedStatement pstmt = null;
         ResultSet rs = null;
-        String loginCheck = null;
+        memberBean memBean = null;
         try {
         	Context initContext = new InitialContext();
     		Context envContext = (Context)initContext.lookup("java:/comp/env");
@@ -27,9 +26,15 @@ public class memberMg {
     		pstmt.setString(2, pw );
     		pstmt.executeQuery();
     		 rs = pstmt.executeQuery();
-    		 if(rs.next()) {adminCheck = rs.getString("admin");}
-    		 if(adminCheck==null) {loginCheck="member";}
-    		 else {loginCheck="admin";}
+    		 if(rs.next()) {
+    			 do {
+    				 memBean = new memberBean();
+    	             	memBean.setId(rs.getString("id"));
+    	             	memBean.setPw(rs.getString("pw"));
+    	    			memBean.setAdmin(rs.getString("admin"));
+    			 }while(rs.next());
+    		 }
+    		 else {memBean = null;}
         }catch (Exception ex) {
             System.out.println("Exception" + ex);
         } finally {
@@ -37,7 +42,7 @@ public class memberMg {
 			if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
 			if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
         }
-        return loginCheck;
+        return memBean;
 	}
 	
 	//마이페이지 조회
@@ -138,7 +143,7 @@ public class memberMg {
 	        	Context initContext = new InitialContext();
 				Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
-				conn = ds.getConnection();
+				conn = ds.getConnection();;
 	            String sql = "select id from dongyang.test_member where id = ?";
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, id);
@@ -210,9 +215,39 @@ public class memberMg {
 	        }
 	        return flag;
 	    }
-	
-	
-	
-	
+	  
+	  //회원목록
+	  public Vector<memberBean> getMemberList() {
+		  Connection conn = null;
+	        Statement stmt = null;
+	        ResultSet rs = null;
+	        Vector<memberBean> mResult = new Vector<memberBean>();
+
+	        try {
+	        	Context initContext = new InitialContext();
+				Context envContext = (Context)initContext.lookup("java:/comp/env");
+				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
+				conn = ds.getConnection();
+	            String sql = "select * from dongyang.test_member";
+	            stmt = conn.createStatement();
+	            rs = stmt.executeQuery(sql);
+
+	            while (rs.next()) {
+	                memberBean memBean = new memberBean();
+	                memBean.setId(rs.getString("id"));
+	                memBean.setPw(rs.getString("pw"));
+	                memBean.setEmail(rs.getString("mail"));
+	                memBean.setAdmin(rs.getString("admin"));
+	                mResult.add(memBean);
+	            }
+	        } catch (Exception ex) {
+	            System.out.println("Exception" + ex);
+	        } finally {
+	        	if (stmt != null) try { stmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
+	        	if (rs != null) try { rs.close(); } catch(SQLException ex) {ex.printStackTrace();}
+				if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
+	        }
+	        return mResult;
+	  }
 
 }
