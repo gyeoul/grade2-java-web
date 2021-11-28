@@ -17,11 +17,39 @@
 <jsp:include page="./header.jsp" />
 <section>
     <article id="schedule" class="sec">
+        <%
+            Connection conn = null;
+            PreparedStatement pstmt = null;
+            ResultSet rs = null;
+
+            try{
+                Context initContext = new InitialContext();
+                Context envContext = (Context)initContext.lookup("java:/comp/env");
+                DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
+                conn = ds.getConnection();
+
+                String sql = "select * from ( select * from dongyang.Schedule order by date desc LIMIT 5) a order by date";
+                pstmt = conn.prepareStatement(sql);
+
+                rs = pstmt.executeQuery();
+                System.out.println(rs);
+        %>
         <h2>KBO 일정</h2>
         <hr>
+
+        <% while (rs.next()){
+            System.out.println(rs.getObject(1));
+            String date = rs.getString("date");
+            String away = rs.getString("away");
+            String home = rs.getString("home");
+            String awayScore = rs.getString("awayScore");
+            String homeScore = rs.getString("homeScore");
+            String stadium = rs.getString("stadium");
+            String note = rs.getString("note");
+        %>
         <div class="schedule_item">
             <div class="date">
-                <b> 잠실 </b>| 17:00
+                <b> <%= stadium %> </b>| <%=date%>
             </div>
             <div class="versus">
                 <br>
@@ -32,8 +60,8 @@
                         <td><img src="./img/emblem_doosan.png" alt="두산"></td>
                     </tr>
                     <tr>
-                        <td>KIA</td>
-                        <td>두산</td>
+                        <td><%=away%></td>
+                        <td><%=home%></td>
                     </tr>
                 </table>
             </div>
@@ -66,194 +94,16 @@
                 </table>
             </div>
         </div>
-        <div class="schedule_item">
-            <div class="date">
-                <b> 잠실 </b>| 17:00
-            </div>
-            <div class="versus">
-                <br>
-                <table>
-                    <tr>
-                        <td><img src="./img/emblem_ssg.png" alt="SSG"></td>
-                        <td rowspan="2">vs</td>
-                        <td><img src="./img/emblem_lotte.png" alt="롯데"></td>
-                    </tr>
-                    <tr>
-                        <td>SSG</td>
-                        <td>롯데</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="weather">
-                <table>
-                    <tr>
-                        <td colspan="3" class="highlight_lightgrey">현재 날씨</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="./img/weather/03_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./rain_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./img/weather/01_xs.png" alt="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>구름 조금</td>
-                        <td>강수확률</td>
-                        <td>(초)미세먼지</td>
-                    </tr>
-                    <tr>
-                        <td>12℃</td>
-                        <td>10%</td>
-                        <td>좋음</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="schedule_item">
-            <div class="date">
-                <b> 잠실 </b>| 17:00
-            </div>
-            <div class="versus">
-                <br>
-                <table>
-                    <tr>
-                        <td><img src="./img/emblem_LG.png" alt="LG"></td>
-                        <td rowspan="2">vs</td>
-                        <td><img src="./img/emblem_NC.png" alt="NC"></td>
-                    </tr>
-                    <tr>
-                        <td>LG</td>
-                        <td>NC</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="weather">
-                <table>
-                    <tr>
-                        <td colspan="3" class="highlight_lightgrey">현재 날씨</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="./img/weather/03_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./rain_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./img/weather/01_xs.png" alt="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>구름 조금</td>
-                        <td>강수확률</td>
-                        <td>(초)미세먼지</td>
-                    </tr>
-                    <tr>
-                        <td>12℃</td>
-                        <td>10%</td>
-                        <td>좋음</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="schedule_item">
-            <div class="date">
-                <b> 잠실 </b>| 17:00
-            </div>
-            <div class="versus">
-                <br>
-                <table>
-                    <tr>
-                        <td><img src="./img/emblem_hanwha.png" alt="한화"></td>
-                        <td rowspan="2">vs</td>
-                        <td><img src="./img/emblem_KT.png" alt="KT"></td>
-                    </tr>
-                    <tr>
-                        <td>한화</td>
-                        <td>KT</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="weather">
-                <table>
-                    <tr>
-                        <td colspan="3" class="highlight_lightgrey">현재 날씨</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="./img/weather/03_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./rain_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./img/weather/01_xs.png" alt="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>구름 조금</td>
-                        <td>강수확률</td>
-                        <td>(초)미세먼지</td>
-                    </tr>
-                    <tr>
-                        <td>12℃</td>
-                        <td>10%</td>
-                        <td>좋음</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
-        <div class="schedule_item">
-            <div class="date">
-                <b> 잠실 </b>| 17:00
-            </div>
-            <div class="versus">
-                <br>
-                <table>
-                    <tr>
-                        <td><img src="./img/emblem_kiwoom.png" alt="키움"></td>
-                        <td rowspan="2">vs</td>
-                        <td><img src="./img/emblem_samsung.png" alt="삼성"></td>
-                    </tr>
-                    <tr>
-                        <td>키움</td>
-                        <td>삼성</td>
-                    </tr>
-                </table>
-            </div>
-            <div class="weather">
-                <table>
-                    <tr>
-                        <td colspan="3" class="highlight_lightgrey">현재 날씨</td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <img src="./img/weather/03_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./rain_s.png" alt="">
-                        </td>
-                        <td>
-                            <img src="./img/weather/01_xs.png" alt="">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>구름 조금</td>
-                        <td>강수확률</td>
-                        <td>(초)미세먼지</td>
-                    </tr>
-                    <tr>
-                        <td>12℃</td>
-                        <td>10%</td>
-                        <td>좋음</td>
-                    </tr>
-                </table>
-            </div>
-        </div>
+        <%
+                }
+            } catch (Exception e){
+                e.printStackTrace();
+            } finally {
+                if (rs != null) try { rs.close(); } catch(SQLException ex) {ex.printStackTrace();}
+                if (pstmt != null) try { pstmt.close(); } catch(SQLException ex) {ex.printStackTrace();}
+                if (conn != null) try { conn.close(); } catch(SQLException ex) {ex.printStackTrace();}
+            }
+        %>
     </article>
     <article id="rank" class="sec">
         <div id="player_rank">
@@ -370,9 +220,9 @@
                 <p>10월 16일 기준</p>
                 <hr>
                 <%
-                    Connection conn = null;
-                    PreparedStatement pstmt = null;
-                    ResultSet rs = null;
+                    conn = null;
+                    pstmt = null;
+                    rs = null;
 
                     try{
                         Context initContext = new InitialContext();
