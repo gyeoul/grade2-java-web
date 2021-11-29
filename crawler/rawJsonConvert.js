@@ -110,15 +110,16 @@ for (let YEAR = 2010; YEAR <= 2021; YEAR++) {
             console.log(YEAR+'-'+data[0][0].split('(')[0].replace('\.','-')+'T'+data[1][0]+':00');
             bean.date = new Date(YEAR+'-'+data[0][0].split('(')[0].replace('\.','-')+'T'+data[1][0]+':00');
             bean.stadium = data[7][0]; bean.cancelled = data[8][0];
-            bean.awayTeam = data[2][3]?data[2][4]:data[2][2];
-            bean.homeTeam = data[2][0];
+            bean.awayTeam = data[2][0];
+            bean.homeTeam = data[2][3]?data[2][4]:data[2][2];
             bean.awayScore = data[2][3]?data[2][1]:null;
             bean.homeScore = data[2][3]?data[2][3]:null;
             const querydata = Number(bean.date)/100000+tagname(bean.awayTeam)+tagname(bean.homeTeam)+'\t'+bean.date.getFullYear()+'-'+(Number(bean.date.getMonth()+1)<10?"0"+Number(bean.date.getMonth()+1):Number(bean.date.getMonth()+1))+'-'+(bean.date.getDate()<10?"0"+bean.date.getDate():bean.date.getDate())+' '+(bean.date.getHours()<10?"0"+bean.date.getHours():bean.date.getHours())+':'+(bean.date.getMinutes()<10?"0"+bean.date.getMinutes():bean.date.getMinutes())+':'+(bean.date.getSeconds()<10?"0"+bean.date.getSeconds():bean.date.getSeconds())+'\t'+bean.awayTeam+'\t'+bean.homeTeam+'\t'
                 +(bean.awayScore?bean.awayScore:0)+'\t'+(bean.homeScore?bean.homeScore:0)+'\t'+bean.stadium+'\t'+bean.cancelled;
             conn.query(insertsql,querydata.split('\t'),function (err, results) {
                 if (err) {
-                    console.log(err);
+                    if(err.code !== 'ER_DUP_ENTRY')
+                        console.log(err);
                 }
                 console.log(results);
             })

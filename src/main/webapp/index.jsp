@@ -2,6 +2,7 @@
 <%@ page import="javax.naming.*" %>
 <%@ page import="javax.sql.DataSource" %>
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@page import="java.util.Date" %>
 <jsp:useBean class="webproject.teamrankBean" id="teamrankBean"/>
 <!DOCTYPE html>
 <html lang="ko">
@@ -28,14 +29,68 @@
                 DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
                 conn = ds.getConnection();
 
-                String sql = "select * from ( select * from dongyang.Schedule order by date desc LIMIT 5) a order by date";
-                pstmt = conn.prepareStatement(sql);
+                String sql = "select *,unix_timestamp(date) from ( select * from dongyang.Schedule order by date desc LIMIT 5) a order by date";
 
+                pstmt = conn.prepareStatement(sql);
                 rs = pstmt.executeQuery();
                 System.out.println(rs);
         %>
         <h2>KBO 일정</h2>
         <hr>
+        <%!
+            public String convertTag(String str) {
+                String val = str;
+                switch (str){
+                    case "삼미":
+                    case "청보":
+                    case "태평양":
+                    case "현대":
+                        val = "HD";
+                        break;
+                    case "쌍방울":
+                        val = "SB";
+                        break;
+                    case "OB":
+                    case "두산":
+                        val = "OB";
+                        break;
+                    case "해태":
+                    case "KIA":
+                        val = "HT";
+                        break;
+                    case "LG":
+                    case "MBC":
+                        val = "LG";
+                        break;
+                    case "빙그레":
+                    case "한화":
+                        val = "HH";
+                        break;
+                    case "히어로즈":
+                    case "넥센":
+                    case "우리":
+                    case "키움":
+                        val = "WO";
+                        break;
+                    case "삼성":
+                        val = "SS";
+                        break;
+                    case "롯데":
+                        val = "LT";
+                        break;
+                    case "SK":
+                    case "SSG":
+                        val = "SK";
+                        break;
+                    case "NC":
+                    case "KT":
+                        break;
+
+                }
+                return val;
+
+            }
+        %>
 
         <% while (rs.next()){
             System.out.println(rs.getObject(1));
@@ -46,23 +101,41 @@
             String homeScore = rs.getString("homeScore");
             String stadium = rs.getString("stadium");
             String note = rs.getString("note");
+            Date compare = new Date(rs.getLong("unix_timestamp(date)"));
+            Date now = new Date();
+
+            String time = date.split(" ")[1].substring(0,5);
+            date = date.split(" ")[0].split("-")[1]+"월 "+date.split(" ")[0].split("-")[2]+"일";
+            if(!note.equals("-"))
+                time = note;
+            if (now.compareTo(compare) > 0) {
+                time = "경기종료";
+            }
         %>
         <div class="schedule_item">
             <div class="date">
-                <b> <%= stadium %> </b>| <%=date%>
+                <b> <%= stadium %> </b>| <%=time%>
             </div>
             <div class="versus">
                 <br>
                 <table>
                     <tr>
-                        <td><img src="./img/emblem_kia.png" alt="KIA"></td>
-                        <td rowspan="2">vs</td>
-                        <td><img src="./img/emblem_doosan.png" alt="두산"></td>
+                        <td style="padding: 0.25em 0 0.5em 0;font-size: 1.25em" colspan="3"><%=date%></td>
+                    </tr>
+                    <tr>
+                        <td><img src="./img/emblem_<%=convertTag(away)%>.png" alt=<%=away%>></td>
+                        <td rowspan="4">vs</td>
+                        <td><img src="./img/emblem_<%=convertTag(home)%>.png" alt=<%=home%>></td>
                     </tr>
                     <tr>
                         <td><%=away%></td>
                         <td><%=home%></td>
                     </tr>
+                    <tr>
+                        <td style="font-weight: bold;font-size: 1.25em" rowspan="2"> <%=awayScore%></td>
+                        <td style="font-weight: bold;font-size: 1.25em" rowspan="2"> <%=homeScore%></td>
+                    </tr>
+                    <tr></tr>
                 </table>
             </div>
             <div class="weather">

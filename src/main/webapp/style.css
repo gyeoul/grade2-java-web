@@ -94,7 +94,6 @@ nav {
         width: 150px; }
       nav #profile ul a {
         color: white; }
-      
 
 footer {
   width: 100%; }
@@ -133,7 +132,8 @@ footer {
 
 #rank #player_rank {
   display: inline-block;
-  width: 480px; }
+  width: 450px;
+  margin: 15px; }
   #rank #player_rank #rank_select {
     border-collapse: separate;
     font-size: 1.2em;
@@ -155,7 +155,8 @@ footer {
     display: block; }
 #rank #team_rank {
   display: inline-block;
-  width: 480px; }
+  width: 450px;
+  margin: 15px; }
   #rank #team_rank h2 {
     display: inline-block; }
   #rank #team_rank p {
