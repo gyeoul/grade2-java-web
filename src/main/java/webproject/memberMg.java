@@ -20,7 +20,7 @@ public class memberMg {
     		Context envContext = (Context)initContext.lookup("java:/comp/env");
     		DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
     		conn = ds.getConnection();
-    		String sql = "select * from dongyang.test_member where id = ? and pw = ?";
+    		String sql = "select * from dongyang.Member where id = ? and pw = ?";
     		pstmt = conn.prepareStatement(sql);
     		pstmt.setString(1, id );
     		pstmt.setString(2, pw );
@@ -57,7 +57,7 @@ public class memberMg {
     		Context envContext = (Context)initContext.lookup("java:/comp/env");
     		DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
     		conn = ds.getConnection();
-            String sql = "select * from dongyang.test_member where id=?";
+            String sql = "select * from dongyang.Member where id=?";
             pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, memid);
             rs = pstmt.executeQuery();
@@ -88,7 +88,7 @@ public class memberMg {
     		Context envContext = (Context)initContext.lookup("java:/comp/env");
     		DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
     		conn = ds.getConnection();
-	        String sql = "update dongyang.test_member set pw=?, mail=?  where id=? ";
+	        String sql = "update dongyang.Member set pw=?, mail=?  where id=? ";
 	        pstmt = conn.prepareStatement(sql);
 	        pstmt.setString(1, memBean.getPw());
 	        pstmt.setString(2, memBean.getEmail());
@@ -116,7 +116,7 @@ public class memberMg {
 			Context envContext = (Context)initContext.lookup("java:/comp/env");
 			DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
 			conn = ds.getConnection();
-			String sql = "DELETE FROM dongyang.test_member WHERE id = ?";
+			String sql = "DELETE FROM dongyang.Member WHERE id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, memBean.getId());
 			int count = pstmt.executeUpdate();
@@ -144,7 +144,7 @@ public class memberMg {
 				Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();;
-	            String sql = "select id from dongyang.test_member where id = ?";
+	            String sql = "select id from dongyang.Member where id = ?";
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, id);
 	            rs = pstmt.executeQuery();
@@ -170,7 +170,7 @@ public class memberMg {
 				Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
-	            String sql= "select mail from dongyang.test_member where mail = ?";
+	            String sql= "select mail from dongyang.Member where mail = ?";
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, email);
 	            rs = pstmt.executeQuery();
@@ -195,7 +195,7 @@ public class memberMg {
 				Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
-	            String sql = "insert into dongyang.test_member values(?,?,?,?)";
+	            String sql = "insert into dongyang.Member values(?,?,?,?)";
 	            pstmt = conn.prepareStatement(sql);
 	            pstmt.setString(1, memBean.getId());
 	            pstmt.setString(2, memBean.getPw());
@@ -228,7 +228,7 @@ public class memberMg {
 				Context envContext = (Context)initContext.lookup("java:/comp/env");
 				DataSource ds = (DataSource)envContext.lookup("jdbc/mysql");
 				conn = ds.getConnection();
-	            String sql = "select * from dongyang.test_member";
+	            String sql = "select * from dongyang.Member";
 	            stmt = conn.createStatement();
 	            rs = stmt.executeQuery(sql);
 

@@ -1,6 +1,5 @@
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-
-<jsp:useBean class="webproject.memberBean" id="memBean"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<jsp:useBean class="webproject.memberBean" id="memBean" scope="page" />
 <jsp:setProperty name="memBean" property="*" />
 <html>
 <head>

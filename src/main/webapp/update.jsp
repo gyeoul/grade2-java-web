@@ -16,11 +16,12 @@
 			 %>
 		 		<script>
 		 		alert("중복된 이메일입니다.");
-		 		history.back();
+		 		location.href="mypage.jsp";
 		 		</script>
 		 	<%
 		 	}
 			else{
+				 boolean flag = memMg.memberUpdate(memBean);
 			 	if(flag){
 				 %>
 			 		<script>

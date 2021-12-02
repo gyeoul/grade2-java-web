@@ -13,14 +13,12 @@
     <link rel="stylesheet" href="./style.css">
 <style>
 
-      table, th, td {
+     .admintab th, td {
+     	height :  28px;
 		  border: 1px solid black;
 		  border-collapse: collapse;
 		}
-    tr, td {
-  			height :  28px;
-		}
-    thead tr td {
+    .admintab thead tr td {
     	background-color: #333333;
     	color : #ffffff;
     	margin-top : 30px;
@@ -28,10 +26,10 @@
     	font-size : 20px;
     	height : 30px;
     }
-    a {
+    .admintab a {
       	    all: unset;
       }
-    a:hover {
+    .admintab a:hover {
     	color : #ff0000;
     	text-decoration: underline; 
     	text-underline-position:under;
@@ -46,7 +44,7 @@
 	<article>
 		<h2>회원관리</h2>
 		<hr>
-		<table>
+		<table class="admintab">
 			<thead>
 				<tr>
 				<td> 회원 ID </td>
@@ -58,22 +56,18 @@
 			</thead>
 			<%
 				Vector<memberBean> mResult = memberMg.getMemberList();
-				for (webproject.memberBean bean : mResult) {
-					memberBean = bean;
+				for(int i=0; i<mResult.size(); i++){
+					memberBean = mResult.get(i);
 			%>
 			<tr>
-				<td align="center"><%=memberBean.getId()%>
-				</td>
-				<td align="center"><%=memberBean.getPw()%>
-				</td>
-				<td align="center"><%=memberBean.getEmail()%>
-				</td>
-				<td align="center"><%=memberBean.getAdmin()%>
-				</td>
-				<td align="center"><a href="admin_deleteform.jsp?id=<%=memberBean.getId()%>">회원삭제</a></td>
+			<td align="center"><%=memberBean.getId()%></td>
+			<td align="center"><%=memberBean.getPw()%></td>
+			<td align="center"><%=memberBean.getEmail()%></td>
+			<td align="center"><%=memberBean.getAdmin()%></td>
+			<td align="center"><a href="admin_deleteform.jsp?id=<%=memberBean.getId()%>">회원삭제</a></td>
 			</tr>
 			<%
-				}
+			}
 			%>
 		</table>
 		

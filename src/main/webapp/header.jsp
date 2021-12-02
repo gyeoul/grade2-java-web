@@ -31,7 +31,7 @@
                 <a href="#">추천 게시판</a>
             </li>
             <li>
-                <a href="#">게시판</a>
+                <a href="board.jsp">게시판</a>
             </li>
         </ul>
         <div id="profile" class="navicon">

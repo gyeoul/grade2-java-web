@@ -2,7 +2,7 @@
 		 pageEncoding="UTF-8"%>
 <jsp:useBean class="webproject.memberBean" id="memBean"/>
 <jsp:setProperty name="memBean" property="*" />
-<jsp:useBean class="webproject.memberMg" id="memMg"/>
+<jsp:useBean class="webproject.memberMg" id="memMg" scope="page" />
 <%
 	String id = request.getParameter("id");
 	String pw = request.getParameter("pw");
