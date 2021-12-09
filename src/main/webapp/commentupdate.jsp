@@ -45,9 +45,9 @@ if(memlogin==null){
 			else if(flag.equals("mod")){
 				%>
 				<script>
-				location.href='post.jsp?bno=<%=bo%>';
 				window.open("commentmodify.jsp?bno=<%=bo%>&cno=<%=co%>", '댓글수정', ' width=700, height=200');
-		 		</script>
+				location.href='post.jsp?bno=<%=bo%>';
+				</script>
 				<%
 			}
 		}

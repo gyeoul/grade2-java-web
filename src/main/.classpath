@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="src" path="/webproject.main/java"/>
+	<classpathentry kind="src" path="/webproject.main/resources"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/Gradle: javax.servlet:javax.servlet-api:4.0.1"/>
+	<classpathentry kind="output" path="/webproject/build/classes/java/main"/>
+</classpath>

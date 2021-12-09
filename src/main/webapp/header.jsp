@@ -25,10 +25,10 @@
                 </a>
             </li>
             <li>
-                <a href="#">공지사항</a>
+                <a href="boardnotice.jsp">공지사항</a>
             </li>
             <li>
-                <a href="#">추천 게시판</a>
+                <a href="boardreco.jsp">추천 게시판</a>
             </li>
             <li>
                 <a href="board.jsp">게시판</a>

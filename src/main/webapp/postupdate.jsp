@@ -43,7 +43,7 @@ if(memlogin==null){
 			else if(flag.equals("mod")){
 				%>
 				<script>
-				location.href='postmodify.jsp?no=<%=bno%>';
+				location.href='postmodify.jsp?no=<%=bno%>&flag=update';
 		 		</script>
 				<%
 			}

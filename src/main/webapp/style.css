@@ -8,7 +8,8 @@ body {
     margin: auto; }
   body section {
     width: 100%;
-    background-color: white; }
+    background-color: white;
+    min-height: 978px; }
   body ul {
     list-style: none;
     padding: 0;
@@ -119,6 +120,8 @@ footer {
     color: white;
     padding: 15px;
     font-size: 1.3em; }
+  .schedule_item .versus tr:last-child > td {
+    padding-bottom: 2em; }
   .schedule_item .weather {
     margin-top: 20px; }
     .schedule_item .weather table tr img {
@@ -126,7 +129,7 @@ footer {
     .schedule_item .weather table tr > td {
       padding: 0.25em 0;
       font-size: 0.8em; }
-    .schedule_item .weather table tr:first-child > td {
+    .schedule_item .weather table tr > th {
       padding: 0.5em;
       font-size: 1em; }
 
@@ -139,20 +142,23 @@ footer {
     font-size: 1.2em;
     font-weight: bold;
     border-bottom: 3px solid #333; }
-    #rank #player_rank #rank_select td {
+    #rank #player_rank #rank_select th {
       width: 30%;
       padding: 10px; }
-      #rank #player_rank #rank_select td:hover {
+      #rank #player_rank #rank_select th:hover {
         background-color: #333333;
         color: white; }
-  #rank #player_rank #rank_data #hitter_rank, #rank #player_rank #rank_data #pitcher_rank, #rank #player_rank #rank_data #week_rank {
+  #rank #player_rank #rank_data table {
+    width: 100%;
     display: none; }
-  #rank #player_rank #rank_select:nth-child(1):hover #hitter_rank {
-    display: block; }
-  #rank #player_rank #rank_select:nth-child(2):hover #pitcher_rank {
-    display: block; }
-  #rank #player_rank #rank_select:nth-child(3):hover #week_rank {
-    display: block; }
+    #rank #player_rank #rank_data table th {
+      padding: 0.75em 0; }
+      #rank #player_rank #rank_data table th:nth-child(2n) {
+        width: 30%; }
+    #rank #player_rank #rank_data table td {
+      padding: 0.75em 0; }
+      #rank #player_rank #rank_data table td b {
+        word-break: keep-all; }
 #rank #team_rank {
   display: inline-block;
   width: 450px;
@@ -162,11 +168,11 @@ footer {
   #rank #team_rank p {
     display: inline-block;
     float: right; }
+  #rank #team_rank table tr th {
+    font-weight: bold; }
   #rank #team_rank table tr td {
     width: auto;
     padding: 5px; }
-    #rank #team_rank table tr td:first-child {
-      font-weight: bold; }
   #rank #team_rank table tr:first-child {
     font-weight: bold; }
     #rank #team_rank table tr:first-child td {

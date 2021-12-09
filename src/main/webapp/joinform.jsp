@@ -53,6 +53,8 @@
 	<jsp:include page="./header.jsp" />
 	<section>
 	<article id="join">
+		<span><a href="loginform.jsp">로그인</a></span>
+		<span>|</span>
 		<h2>회원가입</h2>
 		<hr>
 		<form action="join.jsp" method="post">

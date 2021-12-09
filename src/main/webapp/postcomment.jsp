@@ -20,24 +20,6 @@
 		</script>
 		<%
 	}
-	else if(flag.equals("mod")){
-		boolean result = boardmg.updateComment(bno, cno, ccontent);
-		if(result){
-			%>
-			<script>
-			window.alert("댓글등록");
-			self.close();
-			</script>
-			<%
-		} else {
-			%>
-			<script>
-			alert("오류");
-			self.close();
-			</script>
-			<%
-		}
-	}
 	else{
 		boolean result = boardmg.postComment(bno, id, ccontent);
 		if(result){

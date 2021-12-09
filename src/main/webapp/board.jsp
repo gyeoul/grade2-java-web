@@ -30,13 +30,18 @@
 	}
 </style>
 <% String memlogin = (String)session.getAttribute("memlogin");
- 	Vector<boardBean> pResult = boardmg.getPostList(); %>
+ 	Vector<boardBean> pResult = boardmg.getPostList();
+ 	Vector<boardBean> nResult = boardmg.getNoticePostList();
+ 	%>
+
 </head>
 <body>
 <jsp:include page="./header.jsp" />
 <section>
 	<article>
-		<h2>게시판</h2>
+
+
+	<h2><a href="board.jsp" style="color:black;">게시판</a></h2>
 		<hr>
 		<table class="board">
 			<thead style="background-color:#333333; color:white; height : 40px;">
@@ -49,13 +54,24 @@
 					<td> 추천수 </td>
 				</tr>
 			</thead>
+				<% for (int i=0; i<nResult.size(); i++) {
+						boardB = nResult.get(i);%>
+				<tr  style="height: 30px; background-color:#f2f2f2; font-weight:bold;">
+					<td><%=boardB.getBno()%> </td>
+					<td><%=boardB.getBtag()%></td>
+					<td class="btitle"><a href="postnotice.jsp?bno=<%=boardB.getBno()%>&flag=board"><%=boardB.getBtitle()%></a></td>
+					<td><%=boardB.getBwriter()%></td>
+					<td colspan="2"><%=boardB.getBdate()%> </td>
+				</tr>
+				<% }%>
+
 				<% for (int i=0; i<pResult.size(); i++) {
 						boardB = pResult.get(i);%>
 				<tr  style="height: 30px;">
 					<td><%=boardB.getBno()%> </td>
-					<td><%=boardB.getBtag()%></td>
+					<td><a href="boardtag.jsp?tag=<%=boardB.getBtag()%>"><%=boardB.getBtag()%></a></td>
 					<% int cocnt = boardmg.countComment(boardB.getBno()); %>
-					<td class="btitle"><a href="post.jsp?bno=<%=boardB.getBno()%>"><%=boardB.getBtitle()%></a><span>  [<%=cocnt%>]</span></td>
+					<td class="btitle"><a href="post.jsp?bno=<%=boardB.getBno()%>&flag=board"><%=boardB.getBtitle()%></a><span>  [<%=cocnt%>]</span></td>
 					<td><%=boardB.getBwriter()%></td>
 					<td><%=boardB.getBdate()%> </td>
 					<td><%=boardB.getBreco()%> </td>
@@ -68,7 +84,7 @@
 				<% }
 				else {
 					%>
-					location="writeform.jsp"
+					location="writeform.jsp?flag=insert"
 					<%
 				}
 				%>' value="글쓰기">

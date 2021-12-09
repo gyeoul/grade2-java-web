@@ -3,40 +3,51 @@ body {
   padding: 0;
   background-color: #333333;
   font-family: sans-serif;
+
   nav {
     width: 978px;
     margin: auto;
   }
+
   section {
     width: 100%;
     background-color: white;
+    min-height: 978px;
   }
+
   ul {
     list-style: none;
     padding: 0;
     margin: 0;
   }
+
   a {
     text-decoration: none;
   }
+
   article {
     padding: 25px;
     margin: auto;
     width: 978px;
+
     hr {
       background-color: #333;
     }
+
     figure {
       display: inline-block;
       margin: 0;
+
       img {
         width: 80%;
       }
     }
+
     table {
       text-align: center;
       width: 100%;
       border-collapse: collapse;
+
       tr {
         td {
           padding: 0;
@@ -45,27 +56,34 @@ body {
     }
   }
 }
-.highlight_lightgrey{
+
+.highlight_lightgrey {
   background-color: lightgray;
 }
-.bordering_lightgrey{
+
+.bordering_lightgrey {
   border-color: lightgray;
 }
-header{
+
+header {
   width: 100%;
   background-color: #333; //팀별 변경
 }
+
 nav {
   height: 60px;
+
   img {
     display: block;
     vertical-align: bottom;
   }
+
   ul {
     display: inline-block;
     padding: 0;
     margin: 0;
     float: left;
+
     li {
       width: 100px;
       display: inline-block;
@@ -73,35 +91,42 @@ nav {
       vertical-align: top;
       line-height: 60px;
       height: 60px;
+
       img {
         height: 30px;
         margin: auto;
         padding: 12.5px;
       }
+
       a {
         display: block;
         color: white; //팀별 변경?
         text-decoration: none;
       }
+
       a:hover {
         text-decoration: underline;
         text-decoration-color: white; //팀별 변경?
       }
     }
   }
+
   #profile {
     display: inline-block;
     left: 10px;
     float: right;
     height: 60px;
+
     img {
       height: 30px;
       padding: 15px;
       margin: auto;
     }
-    &:hover ul{
+
+    &:hover ul {
       display: block;
     }
+
     ul {
       text-align: left;
       background-color: grey;
@@ -110,27 +135,33 @@ nav {
       display: none;
       float: right;
       position: absolute;
+
       li {
         width: 150px;
       }
-      a{
+
+      a {
         color: white;
       }
     }
   }
 }
+
 footer {
   width: 100%;
+
   div {
     width: 978px;
     margin: auto;
     padding: 20px;
     color: white;
   }
-  a{
+
+  a {
     color: white;
   }
 }
+
 //공용
 
 //메인페이지
@@ -143,24 +174,35 @@ footer {
   font-size: 0.8em;
   background-color: #f7f7f7;
   border: 1px solid #333;
+
   .date {
     background-color: #333333;
     color: white;
     padding: 15px;
     font-size: 1.3em;
   }
+
+  .versus {
+    tr:last-child > td {
+      padding-bottom: 2em;
+    }
+  }
+
   .weather {
     margin-top: 20px;
+
     table {
       tr {
         img {
           width: 50%;
         }
-        &>td{
+
+        & > td {
           padding: 0.25em 0;
           font-size: 0.8em;
         }
-        &:first-child>td {
+
+        & > th {
           padding: 0.5em;
           font-size: 1em;
         }
@@ -174,60 +216,75 @@ footer {
     display: inline-block;
     width: 450px;
     margin: 15px;
-    table {
-    }
+
     #rank_select {
       border-collapse: separate;
       font-size: 1.2em;
       font-weight: bold;
       border-bottom: 3px solid #333;
-      td {
+
+      th {
         width: 30%;
         padding: 10px;
+
         &:hover {
           background-color: #333333;
           color: white;
         }
       }
     }
+
     #rank_data {
-      #hitter_rank,#pitcher_rank,#week_rank{
+      table {
+        width: 100%;
         display: none;
+        th {
+          padding: 0.75em 0;
+          &:nth-child(2n) {
+            width: 30%;
+          }
+        }
+        td {
+          padding: 0.75em 0;
+
+          b {
+            word-break: keep-all;
+          }
+        }
       }
     }
-    #rank_select:nth-child(1):hover #hitter_rank {
-      display: block;
-    }
-    #rank_select:nth-child(2):hover #pitcher_rank {
-      display: block;
-    }
-    #rank_select:nth-child(3):hover #week_rank {
-      display: block;
-    }
+
   }
+
   #team_rank {
     display: inline-block;
     width: 450px;
     margin: 15px;
+
     h2 {
       display: inline-block;
     }
+
     p {
       display: inline-block;
       float: right;
     }
+
     table {
       tr {
+        th {
+          font-weight: bold;
+        }
+
         td {
           width: auto;
           padding: 5px;
-          &:first-child {
-            font-weight: bold;
-          }
         }
+
         &:first-child {
           font-weight: bold;
-          td{
+
+          td {
             padding: 10px;
           }
         }

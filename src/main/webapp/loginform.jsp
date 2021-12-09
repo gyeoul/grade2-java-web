@@ -48,17 +48,17 @@
 <section>
 	<article id="login">
 		<div style= "margin-top: 20px; margin-bottom: 20px;" >
-		<span>로그인</span>
+		<h2>로그인</h2>
 		<span>|</span>
 		<span><a href="joinform.jsp">회원가입</a></span>
 		</div>
 			
 		<hr>
 		<form action="login.jsp" method="post">	
-			<label id="ID">아이디</label>
+			<label>아이디</label>
 			<input id="ID" type="text" name="id" size="15" >
 			<br>
-			<label id="PW">비밀번호</label>
+			<label>비밀번호</label>
 			<input id="PW" type="password" name="pw" size="15">
 			<br>
 			<input id="ok" type="submit" value="로그인">

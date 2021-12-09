@@ -11,8 +11,11 @@
 <% request.setCharacterEncoding("utf-8");%>
 <% String memid = (String)session.getAttribute("memid"); %>
 <% String id = request.getParameter("writer"); %>
+<% String flag = request.getParameter("flag"); %>
 <% int bno = Integer.parseInt(request.getParameter("no")); %>
-<% boardB = boardmg.getPost(bno); %>
+
+<% if(flag.equals("update")){ boardB = boardmg.getPost(bno);}
+	else if(flag.equals("noticeup")){ boardB = boardmg.getNoticePost(bno);}%>
 
 <!DOCTYPE html>
 <html>
@@ -56,7 +59,7 @@
 <article>
 	<h2>글작성</h2>
 	<hr>
-	<form method="post" action="write.jsp?flag=update&bno=<%=bno %>" encType="multipart/form-data">
+	<form method="post" action="write.jsp?flag=<%=flag%>&bno=<%=bno %>" encType="multipart/form-data">
 		<table class="modifyform">
 			<tr>
 				<td style="margin-left:-20px;" >말머리</td>

@@ -26,7 +26,7 @@
 <body>
 	<h2>댓글수정</h2>
 	<hr>
-	<form method="post" action="postcomment.jsp?flag=mod&bno=<%=bno%>&cno=<%=cno%>">
+	<form method="post" action="commentmodify2.jsp?bno=<%=bno%>&cno=<%=cno%>">
 	<textarea rows="2" cols="95 " name="ccontent" style="resize: none; padding:20px; margin-top:10px;"></textarea>
 	<div>
 		<input type="submit" value="수정"><input type="button" onClick="window.close()"  value="취소">

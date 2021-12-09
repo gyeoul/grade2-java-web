@@ -20,7 +20,7 @@
     		<%	}else{%>
     			  <script>
     			    alert("오류가 발생하였습니다. 제대로 입력했는지 확인해주세요.");
-    			    location.href="writeform.jsp";
+    			    location.href="writeform.jsp?flag=insert";
     			  </script>
     		<%	}
 	}else if(flag.equals("update")){
@@ -37,7 +37,36 @@
     			    location.href="board.jsp";
     			  </script>
     		<%	}
-	}else{
+	}else if(flag.equals("noticeins")){
+    	result=boardmg.insertNoticePost(request);
+    	if(result){
+    		%>
+    			  <script>
+    			    alert("작성완료");
+    				location.href="boardnotice.jsp";
+    			  </script>
+    		<%	}else{%>
+    			  <script>
+    			    alert("오류가 발생하였습니다. 제대로 입력했는지 확인해주세요.");
+    			    location.href="writeform.jsp?flag=notice";
+    			  </script>
+    		<%	}
+	}else if(flag.equals("noticeup")){
+    	result=boardmg.updateNoticePost(request);
+    	if(result){
+    		%>
+    			  <script>
+    			    alert("수정완료");
+    				location.href="boardnotice.jsp";
+    			  </script>
+    		<%	}else{%>
+    			  <script>
+    			  alert("오류가 발생하였습니다.");
+  			    location.href="boardnotice.jsp";
+    			  </script>
+    		<%	}
+	}
+	else{
 		response.sendRedirect("board.jsp");
 	}
 	%>	

@@ -36,6 +36,7 @@
 	}
 </style>
 <%String memid = (String)session.getAttribute("memid"); %>
+<%String flag = request.getParameter("flag"); %>
 </head>
 <body>
 <jsp:include page="./header.jsp" />
@@ -43,7 +44,7 @@
 <article>
 	<h2>글작성</h2>
 	<hr>
-	<form method="post" action="write.jsp?flag=insert" encType="multipart/form-data">
+	<form method="post" action="write.jsp?flag=<%=flag%>" encType="multipart/form-data">
 		<table class="writeform">
 			<tr>
 				<td style="width:20%;">말머리</td>

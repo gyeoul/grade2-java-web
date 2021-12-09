@@ -4,12 +4,14 @@
 <jsp:useBean class="webproject.boardBean" id="boardB" scope="page" />
 <jsp:useBean class="webproject.commentBean" id="commentB" scope="page" />
 <%@page import="java.util.*, webproject.*"%>
+<% request.setCharacterEncoding("utf-8");%>
 <% int bno = Integer.parseInt(request.getParameter("bno")); %>
 <% boardB = boardmg.getPost(bno); %>
 <%String memid = (String)session.getAttribute("memid"); %>
 <% 
 	String memlogin = (String)session.getAttribute("memlogin");
  	Vector<commentBean> cResult = boardmg.getCommentList(bno);
+ 	String flag = request.getParameter("flag");
 
 %>
 <!DOCTYPE html>
@@ -18,6 +20,9 @@
 <meta charset="UTF-8">
 <title>post no.<%=bno %></title>
 <style>
+	.post a{
+		color: white;
+	}
 	.update a{
 		text-decoration :none;
 		color:#333333;
@@ -52,12 +57,14 @@
 <jsp:include page="./header.jsp" />
 <section>
 <article>
-	<h2><a href="board.jsp" style="color:black;">게시판</a></h2>
+
+	<h2><% 	if(flag.equals("board")){%> <a href="board.jsp" style="color:black;">게시판</a> <%;}
+ 		else if(flag.equals("reco")){%> <a href="boardreco.jsp" style="color:black;">추천 게시판</a> <%;} %></h2>
 	<hr>
 	<table class="post">
 		<thead style="background-color:#333333; color:white; height : 40px;">
 			<tr style="border-bottom:1px solid; ">
-				<td style="width:10%;">[ <%=boardB.getBtag() %> ]</td>
+				<td style="width:10%;"><a href="boardtag.jsp?tag=<%=boardB.getBtag()%>">[ <%=boardB.getBtag() %> ]</a></td>
 				<td style="text-align:left"><%=boardB.getBtitle() %></td>
 			</tr>
 		</thead>

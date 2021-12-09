@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component inheritJdk="true">
+	<contentEntry url="file://$MODULE_DIR$/../../src/main"/>
+	<lib name="Gradle: javax.servlet:javax.servlet-api:4.0.1" scope="PROVIDED"/>
+	<levels>
+		<level name="Gradle: javax.servlet:javax.servlet-api:4.0.1" value="project"/>
+	</levels>
+</component>
